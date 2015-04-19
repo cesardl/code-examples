@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * JFrameGraficos.java
  *
  * Created on 10/05/2009, 05:27:09 PM
