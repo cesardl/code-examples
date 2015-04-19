@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+	<groupId>org.sanmarcux.samples.examples</groupId>
+	<artifactId>examples</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    
+    <name>Code Examples</name>
+    <description>Many examples code</description>
+    <url>https://github.com/cesardl/code-examples</url>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        
+		<slf4j.version>1.6.1</slf4j.version>
+		<poi.version>3.11</poi.version>
+        <jfreechart.version>1.0.19</jfreechart.version>
+        
+        <junit.version>4.12</junit.version>
+    </properties>
+	
+    <modules>
+        <module>apache-poi</module>
+        <module>csv</module>
+        <module>jfreechart</module>
+        <module>printer</module>
+        <module>string-analyzer</module>
+    </modules>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+    </dependencies>
+    
+</project>
