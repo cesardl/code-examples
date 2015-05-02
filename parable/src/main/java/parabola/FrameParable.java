@@ -4,9 +4,9 @@ package parabola;
  * 
  * @author Cesardl
  */
-public class FrameParabola extends javax.swing.JFrame {
+public class FrameParable extends javax.swing.JFrame {
 
-    public FrameParabola() {
+    public FrameParable() {
         initComponents();
     }
 

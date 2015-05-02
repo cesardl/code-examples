@@ -1,5 +1,6 @@
-package parabola;
+package cronometro;
 
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
@@ -20,11 +21,11 @@ public class App {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
                 public void run() {
-                    new FrameParable().setVisible(true);
+                    new FrameCronometro().setVisible(true);
                 }
             });
         } catch (ClassNotFoundException e) {
