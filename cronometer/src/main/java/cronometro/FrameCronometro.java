@@ -1,27 +1,25 @@
 package cronometro;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
+import javax.swing.SwingWorker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class FrameCronometro extends JFrame implements ActionListener {
+public class FrameCronometro extends JFrame {
 
-    private Cronometro c;
-    private int inicio;
+    private static final Logger log = LoggerFactory.getLogger(JFrame.class);
+
+    private CronometerWorker worker;
+//    private int inicio;
 
     public FrameCronometro() {
         initComponents();
 
-        inicio = 0;
-
-        buttonIniciar.addActionListener(this);
-        buttonEmpezar.addActionListener(this);
-        buttonDetener.addActionListener(this);
-        buttonContinuar.addActionListener(this);
-        buttonTerminar.addActionListener(this);
-        toggleButtonAscendente.addActionListener(this);
-        toggleButtonDescendente.addActionListener(this);
+//        inicio = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -34,8 +32,8 @@ public class FrameCronometro extends JFrame implements ActionListener {
         textField = new javax.swing.JTextField();
         toggleButtonAscendente = new javax.swing.JToggleButton();
         toggleButtonDescendente = new javax.swing.JToggleButton();
-        labelModo = new javax.swing.JLabel();
-        labelCronometro = new javax.swing.JLabel();
+        labelMode = new javax.swing.JLabel();
+        labelCronometer = new javax.swing.JLabel();
         toolBar = new javax.swing.JToolBar();
         buttonEmpezar = new javax.swing.JButton();
         buttonDetener = new javax.swing.JButton();
@@ -54,24 +52,34 @@ public class FrameCronometro extends JFrame implements ActionListener {
         buttonGroup.add(toggleButtonAscendente);
         toggleButtonAscendente.setSelected(true);
         toggleButtonAscendente.setText("Ascendente");
+        toggleButtonAscendente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                toggleButtonItemStateChanged(evt);
+            }
+        });
 
         buttonGroup.add(toggleButtonDescendente);
         toggleButtonDescendente.setText("Descendente");
 
-        labelModo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelModo.setText("Modo:");
+        labelMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMode.setText("Modo:");
 
-        labelCronometro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCronometro.setText("00:00:00");
-        labelCronometro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        labelCronometer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelCronometer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCronometer.setText("00:00:00");
+        labelCronometer.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         toolBar.setRollover(true);
 
         buttonEmpezar.setText("Empezar");
-        buttonEmpezar.setEnabled(false);
         buttonEmpezar.setFocusable(false);
         buttonEmpezar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEmpezar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonEmpezar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEmpezarActionPerformed(evt);
+            }
+        });
         toolBar.add(buttonEmpezar);
 
         buttonDetener.setText("Detener");
@@ -79,6 +87,11 @@ public class FrameCronometro extends JFrame implements ActionListener {
         buttonDetener.setFocusable(false);
         buttonDetener.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonDetener.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonDetener.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolBarButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(buttonDetener);
 
         buttonContinuar.setText("Continuar");
@@ -86,6 +99,11 @@ public class FrameCronometro extends JFrame implements ActionListener {
         buttonContinuar.setFocusable(false);
         buttonContinuar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonContinuar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolBarButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(buttonContinuar);
 
         buttonTerminar.setText("Terminar");
@@ -93,9 +111,19 @@ public class FrameCronometro extends JFrame implements ActionListener {
         buttonTerminar.setFocusable(false);
         buttonTerminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonTerminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolBarButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(buttonTerminar);
 
         buttonIniciar.setText("Inicar");
+        buttonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonIniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -105,14 +133,14 @@ public class FrameCronometro extends JFrame implements ActionListener {
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(labelCronometro, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                        .addComponent(labelCronometer, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                         .addGap(8, 8, 8))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textField, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelModo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelMode, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(toggleButtonAscendente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,12 +157,12 @@ public class FrameCronometro extends JFrame implements ActionListener {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label)
                     .addComponent(textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelModo)
+                    .addComponent(labelMode)
                     .addComponent(toggleButtonAscendente)
                     .addComponent(toggleButtonDescendente)
                     .addComponent(buttonIniciar))
                 .addGap(18, 18, 18)
-                .addComponent(labelCronometro, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(labelCronometer, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -152,68 +180,111 @@ public class FrameCronometro extends JFrame implements ActionListener {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private int aInteger(String s) {
-        try {
-            int valor = Integer.parseInt(s.trim());
-            return valor;
-        } catch (NumberFormatException nfe) {
-            return -1;
-        }
-    }
+    private void toggleButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_toggleButtonItemStateChanged
+        // TODO add your handling code here:
+        JToggleButton b = (JToggleButton) evt.getSource();
+        System.out.println(b.getText() + " - " + b.isSelected());
+    }//GEN-LAST:event_toggleButtonItemStateChanged
 
-    public void iniciar() {
-        if (toggleButtonDescendente.isSelected()) {
-            inicio = aInteger(textField.getText().trim());
-            if (inicio == -1) {
-                JOptionPane.showMessageDialog(this, "Ingrese entero",
-                        "Cronometro", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                buttonEmpezar.setEnabled(true);
-                textField.setEnabled(false);
-                buttonIniciar.setEnabled(false);
-                toggleButtonAscendente.setEnabled(false);
-                toggleButtonDescendente.setEnabled(false);
-            }
-        }
-    }
+    private void buttonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIniciarActionPerformed
 
-    public void actionPerformed(ActionEvent evt) {
-        if (toggleButtonAscendente.isSelected()) {
-            textField.setEnabled(false);
-        }
-        if (toggleButtonDescendente.isSelected()) {
-            textField.setEnabled(true);
-        }
-        if (evt.getSource().equals(buttonIniciar)) {
-            iniciar();
-        }
-        if (evt.getSource().equals(buttonEmpezar)) {
-            boolean modo = toggleButtonAscendente.isSelected();
-            c = new Cronometro(inicio, modo, labelCronometro);
-            c.start();
-            buttonEmpezar.setEnabled(false);
-            buttonDetener.setEnabled(true);
-            buttonTerminar.setEnabled(true);
-        }
+//        if (toggleButtonDescendente.isSelected()) {
+//            inicio = aInteger(textField.getText().trim());
+//            if (inicio == -1) {
+//                JOptionPane.showMessageDialog(this, "Ingrese entero",
+//                        "Cronometro", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                buttonEmpezar.setEnabled(true);
+//                textField.setEnabled(false);
+//                buttonIniciar.setEnabled(false);
+//                toggleButtonAscendente.setEnabled(false);
+//                toggleButtonDescendente.setEnabled(false);
+//            }
+//        }
+    }//GEN-LAST:event_buttonIniciarActionPerformed
+
+    private void toolBarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolBarButtonActionPerformed
+//        if (evt.getSource().equals(buttonEmpezar)) {
+//            boolean modo = toggleButtonAscendente.isSelected();
+            // TODO worker = new Cronometro(inicio, modo, labelCronometer);
+            // TODO worker.start();
+//            buttonEmpezar.setEnabled(false);
+//            buttonDetener.setEnabled(true);
+//            buttonTerminar.setEnabled(true);
+//        }
         if (evt.getSource().equals(buttonDetener)) {
-            c.suspend();
+            // TODO worker.suspend();
             buttonDetener.setEnabled(false);
             buttonContinuar.setEnabled(true);
         }
         if (evt.getSource().equals(buttonContinuar)) {
-            c.resume();
+            // TODO worker.resume();
             buttonDetener.setEnabled(true);
             buttonContinuar.setEnabled(false);
         }
         if (evt.getSource().equals(buttonTerminar)) {
-            c.stop();
-            labelCronometro.setText("00 : 00 : 00");
+            // TODO worker.stop();
+            labelCronometer.setText("00 : 00 : 00");
             buttonEmpezar.setEnabled(true);
             buttonDetener.setEnabled(false);
             buttonContinuar.setEnabled(false);
             buttonTerminar.setEnabled(false);
+        }
+    }//GEN-LAST:event_toolBarButtonActionPerformed
+
+    private void buttonEmpezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmpezarActionPerformed
+        try {
+            worker = new CronometerWorker(labelCronometer);
+
+            worker.addPropertyChangeListener(new PropertyChangeListener() {
+
+                @Override
+                public void propertyChange(
+                        final PropertyChangeEvent event) {
+                    switch (event.getPropertyName()) {
+                        case "progress":
+//                                            progressBar.setIndeterminate(false);
+//                                            progressBar.setValue((Integer) event
+//                                                    .getNewValue());
+                            break;
+
+                        case "state":
+                            switch ((SwingWorker.StateValue) event.getNewValue()) {
+                                case DONE:
+//                                                    setEnabledAllButtons(true);
+                                    worker = null;
+//                                                    if (progressBar.isIndeterminate()) {
+//                                                        progressBar
+//                                                        .setIndeterminate(false);
+//                                                    }
+//                                                    progressBar.setValue(0);
+                                    break;
+
+                                case STARTED:
+                                case PENDING:
+//                                                    progressBar.setIndeterminate(true);
+                                    break;
+                            }
+                            break;
+                    }
+                }
+            });
+            worker.execute();
+        } catch (Exception e) {
+//            textAreaLog.append(e.getClass().getCanonicalName() + ": "
+//                    + e.getMessage() + "\n\n");
+            log.error(e.getMessage(), e);
+        }
+    }//GEN-LAST:event_buttonEmpezarActionPerformed
+
+    private int aInteger(String s) {
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (NumberFormatException nfe) {
+            return -1;
         }
     }
 
@@ -225,8 +296,8 @@ public class FrameCronometro extends JFrame implements ActionListener {
     private javax.swing.JButton buttonIniciar;
     private javax.swing.JButton buttonTerminar;
     private javax.swing.JLabel label;
-    private javax.swing.JLabel labelCronometro;
-    private javax.swing.JLabel labelModo;
+    private javax.swing.JLabel labelCronometer;
+    private javax.swing.JLabel labelMode;
     private javax.swing.JPanel panel;
     private javax.swing.JTextField textField;
     private javax.swing.JToggleButton toggleButtonAscendente;
