@@ -1,132 +1,135 @@
 package parabola;
 
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class FrameParabola extends javax.swing.JFrame implements ActionListener {
-
-    private Graphics graphics;
+/**
+ * 
+ * @author Cesardl
+ */
+public class FrameParabola extends javax.swing.JFrame {
 
     public FrameParabola() {
         initComponents();
-
-        graphics = this.getGraphics();
-
-        jButtonArriba.addActionListener(this);
-        jButtonAbajo.addActionListener(this);
-        jButtonIzquierda.addActionListener(this);
-        jButtonDerecha.addActionListener(this);
-        jButtonBorrar.addActionListener(this);
-
-    }
-
-    private void borrar(Graphics g) {
-        g.clearRect(50, 80, 300, 220);
-        jLabel.setText("Parabolas");
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar = new javax.swing.JToolBar();
-        jButtonArriba = new javax.swing.JButton();
-        jButtonAbajo = new javax.swing.JButton();
-        jButtonIzquierda = new javax.swing.JButton();
-        jButtonDerecha = new javax.swing.JButton();
-        jButtonBorrar = new javax.swing.JButton();
-        jLabel = new javax.swing.JLabel();
+        toolBar = new javax.swing.JToolBar();
+        buttonArriba = new javax.swing.JButton();
+        buttonAbajo = new javax.swing.JButton();
+        buttonIzquierda = new javax.swing.JButton();
+        buttonDerecha = new javax.swing.JButton();
+        buttonBorrar = new javax.swing.JButton();
+        labelStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Parabolas");
         setResizable(false);
 
-        jToolBar.setRollover(true);
+        buttonArriba.setText("Arriba");
+        buttonArriba.setMaximumSize(new java.awt.Dimension(70, 27));
+        buttonArriba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonArriba);
 
-        jButtonArriba.setText("Arriba");
-        jButtonArriba.setMaximumSize(new java.awt.Dimension(70, 27));
-        jToolBar.add(jButtonArriba);
+        buttonAbajo.setText("Abajo");
+        buttonAbajo.setMaximumSize(new java.awt.Dimension(70, 27));
+        buttonAbajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonAbajo);
 
-        jButtonAbajo.setText("Abajo");
-        jButtonAbajo.setMaximumSize(new java.awt.Dimension(70, 27));
-        jToolBar.add(jButtonAbajo);
+        buttonIzquierda.setText("Izquierda");
+        buttonIzquierda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonIzquierda);
 
-        jButtonIzquierda.setText("Izquierda");
-        jToolBar.add(jButtonIzquierda);
+        buttonDerecha.setText("Derecha");
+        buttonDerecha.setMaximumSize(new java.awt.Dimension(70, 27));
+        buttonDerecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonDerecha);
 
-        jButtonDerecha.setText("Derecha");
-        jButtonDerecha.setMaximumSize(new java.awt.Dimension(70, 27));
-        jToolBar.add(jButtonDerecha);
+        buttonBorrar.setText("Borrar");
+        buttonBorrar.setMaximumSize(new java.awt.Dimension(70, 27));
+        buttonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActionPerformed(evt);
+            }
+        });
+        toolBar.add(buttonBorrar);
 
-        jButtonBorrar.setText("Borrar");
-        jButtonBorrar.setMaximumSize(new java.awt.Dimension(70, 27));
-        jToolBar.add(jButtonBorrar);
-
-        jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel.setText("Parabolas");
-        jLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        labelStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelStatus.setText("Parabolas");
+        labelStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+            .addComponent(toolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
-                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(labelStatus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
+        java.awt.Graphics graphics = getGraphics();
 
-            public void run() {
-                new FrameParabola().setVisible(true);
-            }
-        });
-    }
+        if (evt.getSource().equals(buttonArriba)) {
+            graphics.drawArc(160, 10, 100, 250, 180, 180);
+            labelStatus.setText("Parabola hacia arriba");
+        }
+        if (evt.getSource().equals(buttonAbajo)) {
+            graphics.drawArc(160, 100, 100, 250, 0, 180);
+            labelStatus.setText("Parabola hacia abajo");
+        }
+        if (evt.getSource().equals(buttonIzquierda)) {
+            graphics.drawArc(120, 120, 250, 100, 90, 180);
+            labelStatus.setText("Parabola hacia la izquierda");
+        }
+        if (evt.getSource().equals(buttonDerecha)) {
+            graphics.drawArc(50, 120, 250, 100, 270, 180);
+            labelStatus.setText("Parabola hacia derecha");
+        }
+        if (evt.getSource().equals(buttonBorrar)) {
+            graphics.clearRect(50, 50, 270, 220);
+            labelStatus.setText("Parabolas");
+        }
+    }//GEN-LAST:event_buttonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAbajo;
-    private javax.swing.JButton jButtonArriba;
-    private javax.swing.JButton jButtonBorrar;
-    private javax.swing.JButton jButtonDerecha;
-    private javax.swing.JButton jButtonIzquierda;
-    private javax.swing.JLabel jLabel;
-    private javax.swing.JToolBar jToolBar;
+    private javax.swing.JButton buttonAbajo;
+    private javax.swing.JButton buttonArriba;
+    private javax.swing.JButton buttonBorrar;
+    private javax.swing.JButton buttonDerecha;
+    private javax.swing.JButton buttonIzquierda;
+    private javax.swing.JLabel labelStatus;
+    private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(jButtonArriba)) {
-            graphics.drawArc(160, 10, 100, 250, 180, 180);
-            jLabel.setText("Parabola hacia arriba");
-        }
-        if (e.getSource().equals(jButtonAbajo)) {
-            graphics.drawArc(160, 100, 100, 250, 0, 180);
-            jLabel.setText("Parabola hacia abajo");
-        }
-        if (e.getSource().equals(jButtonIzquierda)) {
-            graphics.drawArc(120, 120, 250, 100, 90, 180);
-            jLabel.setText("Parabola hacia la izquierda");
-        }
-        if (e.getSource().equals(jButtonDerecha)) {
-            graphics.drawArc(50, 120, 250, 100, 270, 180);
-            jLabel.setText("Parabola hacia derecha");
-        }
-        if (e.getSource().equals(jButtonBorrar)) {
-            borrar(graphics);
-        }
-    }
 }
