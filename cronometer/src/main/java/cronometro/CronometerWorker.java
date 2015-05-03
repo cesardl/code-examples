@@ -31,14 +31,43 @@ public class CronometerWorker extends SwingWorker<Integer, String> {
 
     @Override
     protected Integer doInBackground() throws Exception {
+        int hora = 0, minuto = 0, segundo = 0;
+        try {
+            for (;;) {
+                failIfInterrupted();
+                Thread.currentThread().sleep(100);
+                publish(addZeroIfNeeded(hora) + " : " + addZeroIfNeeded(minuto) + " : " + addZeroIfNeeded(segundo));
+                segundo++;
+                if (segundo == 60) {
+                    minuto++;
+                    segundo = 0;
+                }
+                if (minuto == 60) {
+                    hora++;
+                }
+            }
+        } catch (InterruptedException ex) {
+            log.error(ex.getMessage(), ex);
+        }
         return 0;
     }
 
     @Override
     protected void process(List<String> chunks) {
         for (final String chunk : chunks) {
-            log.info(chunk);
+            label.setText(chunk);
         }
+    }
+
+    private String addZeroIfNeeded(int i) {
+        StringBuilder sb = new StringBuilder();
+
+        if (i < 10) {
+            sb.append(0);
+        }
+        sb.append(i);
+
+        return sb.toString();
     }
 
 }
