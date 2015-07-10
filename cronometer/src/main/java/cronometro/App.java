@@ -1,8 +1,6 @@
 package cronometro;
 
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +17,11 @@ public class App {
      */
     public static void main(String args[]) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName()
+            );
 
-            SwingUtilities.invokeLater(new Runnable() {
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
                 public void run() {
@@ -34,7 +34,7 @@ public class App {
             log.error("Error while instantiation", e);
         } catch (IllegalAccessException e) {
             log.error("Error illegal access", e);
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (javax.swing.UnsupportedLookAndFeelException e) {
             log.error("Error loading look and feel", e);
         }
     }

@@ -37,7 +37,7 @@ public class ExcelSheetReader {
         /**
          * Create a new instance for cellDataList
          */
-        List cellDataList = new ArrayList();
+        List<List<HSSFCell>> cellDataList = new ArrayList<>();
         try {
             /**
              * Create a new instance for FileInputStream class
@@ -81,30 +81,30 @@ public class ExcelSheetReader {
      *
      * @param cellDataList - List of the data's in the spreadsheet.
      */
-    private void generateSQL(List cellDataList, String path) {
+    private void generateSQL(List<List<HSSFCell>> cellDataList, String path) {
         String salida = "";
         for (int i = 1; i < cellDataList.size(); i++) {
-            List<HSSFCell> cellTempList = (List) cellDataList.get(i);
+            List<HSSFCell> cellTempList = cellDataList.get(i);
 
-            HSSFCell hssfCell = (HSSFCell) cellTempList.get(0);
+            HSSFCell hssfCell = cellTempList.get(0);
             int id = aInteger(hssfCell.toString());
 
             String sql = "insert into premio(id_premio, descripcion, stock_base, stock, url_imagen, id_tipo_premio) values "
                     + "(" + id + ", '";
 
-            hssfCell = (HSSFCell) cellTempList.get(1);
+            hssfCell = cellTempList.get(1);
             String descripcion = hssfCell.toString();
             sql = sql + descripcion.trim() + "', ";
 
-            hssfCell = (HSSFCell) cellTempList.get(2);
+            hssfCell = cellTempList.get(2);
             int stock_base = aInteger(hssfCell.toString());
             sql = sql + stock_base + ", ";
 
-            hssfCell = (HSSFCell) cellTempList.get(4);
+            hssfCell = cellTempList.get(4);
             int stock = aInteger(hssfCell.toString());
             sql = sql + stock + ", '', ";
 
-            hssfCell = (HSSFCell) cellTempList.get(5);
+            hssfCell = cellTempList.get(5);
             int tipo_premio = aInteger(hssfCell.toString());
             sql = sql + tipo_premio;
 
