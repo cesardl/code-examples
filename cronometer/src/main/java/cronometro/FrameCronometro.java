@@ -1,6 +1,7 @@
 package cronometro;
 
 import java.text.ParseException;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.text.MaskFormatter;
 import org.slf4j.Logger;
@@ -166,15 +167,19 @@ public class FrameCronometro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void toggleButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_toggleButtonItemStateChanged
-        // TODO add your handling code here:
+        if (timer.isRunning()) {
+            log.info("Chronometer is running");
+            return;
+        }
+
         javax.swing.JToggleButton source = (javax.swing.JToggleButton) evt.getSource();
-        System.out.println(">>> " + textField.getText());
+
         if (source.isSelected()) {
-            timerListener.setMode(Cronometro.Mode.ASCENDENTE);
+            timerListener.setMode(Mode.UP);
 
             textField.setEnabled(false);
         } else {
-            timerListener.setMode(Cronometro.Mode.DESCENDENTE);
+            timerListener.setMode(Mode.DOWN);
 
             textField.setEnabled(true);
             textField.requestFocus();
@@ -182,13 +187,24 @@ public class FrameCronometro extends javax.swing.JFrame {
     }//GEN-LAST:event_toggleButtonItemStateChanged
 
     private void buttonEmpezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmpezarActionPerformed
+        if (Mode.DOWN.equals(timerListener.getMode())) {
+            try {
+                timerListener.setInicio(textField.getText());
+            } catch (IllegalArgumentException e) {
+                log.warn(e.getMessage());
+                JOptionPane.showMessageDialog(this, e.getMessage(), getTitle(), JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        textField.setEnabled(false);
         timer.start();
 
         buttonEmpezar.setEnabled(false);
         buttonDetener.setEnabled(true);
         buttonTerminar.setEnabled(false);
 
-        log.info("Timer start");
+        log.info("Timer start '{}'", evt.getActionCommand());
     }//GEN-LAST:event_buttonEmpezarActionPerformed
 
     private void buttonDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDetenerActionPerformed
@@ -198,12 +214,17 @@ public class FrameCronometro extends javax.swing.JFrame {
         buttonDetener.setEnabled(false);
         buttonTerminar.setEnabled(true);
 
-        log.info("Timer stop");
+        log.info("Timer stop '{}'", evt.getActionCommand());
     }//GEN-LAST:event_buttonDetenerActionPerformed
 
     private void buttonTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTerminarActionPerformed
         timerListener.init();
-        log.info("Timer finished");
+
+        if (Mode.DOWN.equals(timerListener.getMode())) {
+            textField.setEnabled(true);
+        }
+
+        log.info("Timer finished '{}'", evt.getActionCommand());
     }//GEN-LAST:event_buttonTerminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

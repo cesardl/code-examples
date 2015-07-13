@@ -14,7 +14,7 @@ public class FrameParable extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        toolBar = new javax.swing.JToolBar();
+        javax.swing.JToolBar toolBar = new javax.swing.JToolBar();
         buttonArriba = new javax.swing.JButton();
         buttonAbajo = new javax.swing.JButton();
         buttonIzquierda = new javax.swing.JButton();
@@ -129,7 +129,6 @@ public class FrameParable extends javax.swing.JFrame {
     private javax.swing.JButton buttonDerecha;
     private javax.swing.JButton buttonIzquierda;
     private javax.swing.JLabel labelStatus;
-    private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 
 }

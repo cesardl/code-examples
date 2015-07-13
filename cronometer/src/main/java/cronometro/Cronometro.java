@@ -13,87 +13,66 @@ public final class Cronometro implements java.awt.event.ActionListener {
      */
     private final JLabel label;
 
-    private int hora, minuto, segundo;
+    private int hour, minute, second;
     private Mode mode;
 
     public Cronometro(JLabel label) {
         this.label = label;
-        mode = Mode.ASCENDENTE;
+        mode = Mode.UP;
 
         init();
     }
 
-    public enum Mode {
-
-        ASCENDENTE,
-        DESCENDENTE
-
-    }
-
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
+        print();
+
         switch (mode) {
-            case ASCENDENTE:
-                ascendente();
+            case UP:
+                up();
                 break;
 
-            case DESCENDENTE:
+            case DOWN:
+                down();
                 break;
-        }
-        label.setText(addZeroIfNeeded(hora) + " : " + addZeroIfNeeded(minuto) + " : " + addZeroIfNeeded(segundo));
-    }
-
-    public void ascendente() {
-        segundo++;
-        if (segundo == 60) {
-            minuto++;
-            segundo = 0;
-        }
-        if (minuto == 60) {
-            hora++;
         }
     }
 
-    public void descendente() {
-//        int val = inicio;
-//
-//        if (segundo < 60) {
-//            hora = 0;
-//            minuto = 0;
-//        } else {
-//            while (segundo >= 60) {
-//                segundo = segundo - 60;
-//                minuto++;
-//                if (minuto == 60) {
-//                    hora++;
-//                    minuto = 0;
-//                }
-//            }
-//        }
-//
-//        while (val != -1) {
-//            label.setText(hora + " : " + minuto + " : " + segundo);
-//            if (hora >= 0) {
-//                if (minuto >= 0) {
-//                    if (segundo >= 0) {
-//                        segundo--;
-//                    }
-//                    if (segundo == -1) {
-//                        minuto--;
-//                        segundo = 59;
-//                    }
-//                }
-//                if (minuto == -1) {
-//                    hora--;
-//                    minuto = 59;
-//                }
-//            }
-//            val--;
-//        }
+    private void up() {
+        second++;
+        if (second == 60) {
+            minute++;
+            second = 0;
+        }
+        if (minute == 60) {
+            hour++;
+        }
+    }
+
+    private void down() {
+        if (hour == 0 && minute == 0 && second == 0) {
+            throw new IllegalArgumentException("### DOWN MODE FINISH ###");
+        }
+
+        if (hour >= 0) {
+            if (minute >= 0) {
+                if (second >= 0) {
+                    second--;
+                }
+                if (second == -1) {
+                    minute--;
+                    second = 59;
+                }
+            }
+            if (minute == -1) {
+                hour--;
+                minute = 59;
+            }
+        }
     }
 
     public void init() {
-        hora = minuto = segundo = 0;
+        hour = minute = second = 0;
         label.setText("00 : 00 : 00");
     }
 
@@ -105,6 +84,18 @@ public final class Cronometro implements java.awt.event.ActionListener {
         this.mode = mode;
     }
 
+    public void setInicio(String inicio) {
+        String[] values = inicio.split("\\:");
+
+        hour = Integer.parseInt(values[0]);
+        minute = Integer.parseInt(values[1]);
+        second = Integer.parseInt(values[2]);
+
+        if (hour == 0 && minute == 0 && second == 0) {
+            throw new IllegalArgumentException("Can't set zero values for chronometer in down mode");
+        }
+    }
+
     private String addZeroIfNeeded(int i) {
         StringBuilder sb = new StringBuilder();
 
@@ -114,6 +105,10 @@ public final class Cronometro implements java.awt.event.ActionListener {
         sb.append(i);
 
         return sb.toString();
+    }
+
+    private void print() {
+        label.setText(String.format("%s : %s : %s", addZeroIfNeeded(hour), addZeroIfNeeded(minute), addZeroIfNeeded(second)));
     }
 
 }

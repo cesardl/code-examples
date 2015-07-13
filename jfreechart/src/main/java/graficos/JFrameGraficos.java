@@ -5,7 +5,6 @@
  */
 package graficos;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -71,7 +70,7 @@ public class JFrameGraficos extends javax.swing.JFrame {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(java.awt.Graphics g) {
         if (grafica == null) {
             grafica = this.creaImagen();
         }

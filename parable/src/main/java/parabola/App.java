@@ -1,7 +1,6 @@
 package parabola;
 
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +32,7 @@ public class App {
             log.error("Error while instantiation", e);
         } catch (IllegalAccessException e) {
             log.error("Error illegal access", e);
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (javax.swing.UnsupportedLookAndFeelException e) {
             log.error("Error loading look and feel", e);
         }
     }
