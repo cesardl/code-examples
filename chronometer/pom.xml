@@ -8,7 +8,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>cronometer</artifactId>
-    <name>Examples :: Cronometer</name>
+    <artifactId>chronometer</artifactId>
+    <name>Examples :: Chronometer</name>
 
 </project>

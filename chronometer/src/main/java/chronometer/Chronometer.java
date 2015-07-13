@@ -1,4 +1,4 @@
-package cronometro;
+package chronometer;
 
 /**
  *
@@ -17,7 +17,7 @@ public final class Chronometer implements java.awt.event.ActionListener {
     public Chronometer(FrameChronometer frame) {
         mode = Mode.UP;
 
-        callback = (OnTimerWorksListener) frame;
+        callback = frame;
 
         init();
     }

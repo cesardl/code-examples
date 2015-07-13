@@ -29,7 +29,7 @@
 	
     <modules>
         <module>apache-poi</module>
-        <module>cronometer</module>
+        <module>chronometer</module>
 		<module>csv</module>
         <module>jasper-report</module>
 		<module>jfreechart</module>

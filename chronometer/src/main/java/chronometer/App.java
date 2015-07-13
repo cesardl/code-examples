@@ -1,4 +1,4 @@
-package cronometro;
+package chronometer;
 
 /**
  *

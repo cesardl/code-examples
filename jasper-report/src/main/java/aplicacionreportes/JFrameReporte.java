@@ -26,9 +26,9 @@ public class JFrameReporte extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label = new javax.swing.JLabel();
+        javax.swing.JLabel label = new javax.swing.JLabel();
         textField = new javax.swing.JTextField();
-        button = new javax.swing.JButton();
+        javax.swing.JButton button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Generador de Reportes");
@@ -94,8 +94,6 @@ public class JFrameReporte extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button;
-    private javax.swing.JLabel label;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 }

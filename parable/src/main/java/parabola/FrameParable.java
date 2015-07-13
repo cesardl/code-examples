@@ -1,7 +1,7 @@
 package parabola;
 
 /**
- * 
+ *
  * @author Cesardl
  */
 public class FrameParable extends javax.swing.JFrame {
