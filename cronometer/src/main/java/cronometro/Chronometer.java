@@ -1,24 +1,23 @@
 package cronometro;
 
-import javax.swing.JLabel;
-
 /**
  *
  * @author cesardiaz
  */
-public final class Cronometro implements java.awt.event.ActionListener {
+public final class Chronometer implements java.awt.event.ActionListener {
 
     /**
      * Label where the messages will be written.
      */
-    private final JLabel label;
+    private final OnTimerWorksListener callback;
 
     private int hour, minute, second;
     private Mode mode;
 
-    public Cronometro(JLabel label) {
-        this.label = label;
+    public Chronometer(FrameChronometer frame) {
         mode = Mode.UP;
+
+        callback = (OnTimerWorksListener) frame;
 
         init();
     }
@@ -51,7 +50,8 @@ public final class Cronometro implements java.awt.event.ActionListener {
 
     private void down() {
         if (hour == 0 && minute == 0 && second == 0) {
-            throw new IllegalArgumentException("### DOWN MODE FINISH ###");
+            callback.finishTimerDown();
+            return;
         }
 
         if (hour >= 0) {
@@ -73,7 +73,7 @@ public final class Cronometro implements java.awt.event.ActionListener {
 
     public void init() {
         hour = minute = second = 0;
-        label.setText("00 : 00 : 00");
+        print();
     }
 
     public Mode getMode() {
@@ -84,8 +84,8 @@ public final class Cronometro implements java.awt.event.ActionListener {
         this.mode = mode;
     }
 
-    public void setInicio(String inicio) {
-        String[] values = inicio.split("\\:");
+    public void setStart(String start) {
+        String[] values = start.split("\\:");
 
         hour = Integer.parseInt(values[0]);
         minute = Integer.parseInt(values[1]);
@@ -108,7 +108,15 @@ public final class Cronometro implements java.awt.event.ActionListener {
     }
 
     private void print() {
-        label.setText(String.format("%s : %s : %s", addZeroIfNeeded(hour), addZeroIfNeeded(minute), addZeroIfNeeded(second)));
+        callback.printTime(String.format("%s : %s : %s", addZeroIfNeeded(hour), addZeroIfNeeded(minute), addZeroIfNeeded(second)));
+    }
+
+    interface OnTimerWorksListener {
+
+        void finishTimerDown();
+
+        void printTime(String message);
+
     }
 
 }
