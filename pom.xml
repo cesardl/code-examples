@@ -29,10 +29,12 @@
 	
     <modules>
         <module>apache-poi</module>
-        <module>csv</module>
-        <module>jfreechart</module>
-        <module>printer</module>
+        <module>cronometer</module>
+		<module>csv</module>
         <module>jasper-report</module>
+		<module>jfreechart</module>
+        <module>parable</module>
+		<module>printer</module>
     </modules>
     
     <dependencies>
@@ -46,10 +48,12 @@
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+			<scope>test</scope>
         </dependency>
     </dependencies>
     

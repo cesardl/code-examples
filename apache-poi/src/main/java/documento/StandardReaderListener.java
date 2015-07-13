@@ -32,30 +32,27 @@ public class StandardReaderListener implements POIFSReaderListener {
 
     @Override
     public void processPOIFSReaderEvent(POIFSReaderEvent event) {
-        // Clase que almacena las características estándar de un documento.
-        SummaryInformation si = null;
-
         try {
-            si = (SummaryInformation) PropertySetFactory.create(event.getStream());
+            // Clase que almacena las características estándar de un documento.
+            SummaryInformation si = (SummaryInformation) PropertySetFactory.create(event.getStream());
+
+            // Recogemos los datos que nos interesan y los almacenamos en la clase AnalizadorWord.
+            datos.setTitulo(si.getTitle());
+            datos.setAutor(si.getAuthor());
+            datos.setComentarios(si.getComments());
+            datos.setNumeroCaracteres(si.getCharCount());
+            datos.setNumeroPalabras(si.getWordCount());
+            datos.setNumeroPaginas(si.getPageCount());
+
+            // Usamos la clase WordExtractor para obtener el texto del documento
+            try (FileInputStream fis = new FileInputStream(datos.getFichero())) {
+                WordExtractor we = new WordExtractor(fis);
+                datos.setTexto(we.getText());
+            } catch (Exception e1) {
+                log.error(e1.getMessage(), e1);
+            }
         } catch (NoPropertySetStreamException | MarkUnsupportedException | IOException ex) {
-            throw new RuntimeException("Property set stream \""
-                    + event.getPath() + event.getName() + "\": " + ex);
-        }
-
-        /* Recogemos los datos que nos interesan y los almacenamos en la clase AnalizadorWord.*/
-        datos.setTitulo(si.getTitle());
-        datos.setAutor(si.getAuthor());
-        datos.setComentarios(si.getComments());
-        datos.setNumeroCaracteres(si.getCharCount());
-        datos.setNumeroPalabras(si.getWordCount());
-        datos.setNumeroPaginas(si.getPageCount());
-
-        /* Usamos la clase WordExtractor para obtener el texto del documento */
-        try (FileInputStream fis = new FileInputStream(datos.getFichero())) {
-            WordExtractor we = new WordExtractor(fis);
-            datos.setTexto(we.getText());
-        } catch (Exception e1) {
-            log.error(e1.getMessage(), e1);
+            throw new RuntimeException(String.format("Property set stream \"%s %s\"", event.getPath(), event.getName()), ex);
         }
     }
 }

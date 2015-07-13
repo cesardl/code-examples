@@ -36,7 +36,7 @@ public class ExcelSheetReader_mejorado {
         /**
          * Create a new instance for cellDataList
          */
-        List cellDataList = new ArrayList();
+        List<List<HSSFCell>> cellDataList = new ArrayList<>();
         try {
             /**
              * Create a new instance for FileInputStream class
@@ -80,12 +80,12 @@ public class ExcelSheetReader_mejorado {
      *
      * @param cellDataList - List of the data's in the spreadsheet.
      */
-    private void generateSQL(List cellDataList, String path) {
+    private void generateSQL(List<List<HSSFCell>> cellDataList, String path) {
         String salida = "";
-        List<HSSFCell> premios_ids = (List) cellDataList.get(1);
+        List<HSSFCell> premios_ids = cellDataList.get(1);
 
         for (int i = 2; i < cellDataList.size(); i++) {
-            List<HSSFCell> agencias = (List) cellDataList.get(i);
+            List<HSSFCell> agencias = cellDataList.get(i);
 
             int id_agencia = aInteger(agencias.get(0).toString());
 
