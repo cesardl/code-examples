@@ -8,7 +8,15 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>csv</artifactId>
-    <name>Examples :: CSV</name>
+    <artifactId>csv-reader</artifactId>
+    <name>Examples :: CSV Reader</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

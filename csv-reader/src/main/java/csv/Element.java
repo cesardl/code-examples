@@ -7,7 +7,7 @@ package csv;
 public class Element {
 
     private final String chemicalName;
-    private final String simbol;
+    private final String symbol;
     private final String atomNum;
     private final String atomWeight;
 
@@ -19,7 +19,7 @@ public class Element {
 
         // Required parameters
         private final String chemicalName;
-        private final String simbol;
+        private final String symbol;
         private final String atomNum;
 
         // Optional parameters - initialized to default values
@@ -28,9 +28,9 @@ public class Element {
         private String meltPoint;
         private String density;
 
-        public Builder(String chemicalName, String simbol, String atomNum) {
+        public Builder(String chemicalName, String symbol, String atomNum) {
             this.chemicalName = chemicalName;
-            this.simbol = simbol;
+            this.symbol = symbol;
             this.atomNum = atomNum;
         }
 
@@ -69,7 +69,7 @@ public class Element {
 
     private Element(Builder builder) {
         this.chemicalName = builder.chemicalName;
-        this.simbol = builder.simbol;
+        this.symbol = builder.symbol;
         this.atomNum = builder.atomNum;
         this.atomWeight = builder.atomWeight;
         this.boilPoint = builder.boilPoint;
@@ -82,8 +82,8 @@ public class Element {
         StringBuilder sb = new StringBuilder(getClass().getCanonicalName());
         sb.append("[ Chemical name: ");
         sb.append(chemicalName);
-        sb.append(", Simbol: ");
-        sb.append(simbol);
+        sb.append(", Symbol: ");
+        sb.append(symbol);
         sb.append(", Atom num: ");
         sb.append(atomNum);
 

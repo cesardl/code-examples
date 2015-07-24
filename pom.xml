@@ -19,7 +19,9 @@
         
         <slf4j.version>1.6.1</slf4j.version>
         <mysql.driver.version>5.1.21</mysql.driver.version>
-        
+
+        <spring.version>4.1.7.RELEASE</spring.version>
+
         <poi.version>3.11</poi.version>
         <jfreechart.version>1.0.19</jfreechart.version>
         <jasper.report.version>5.0.1</jasper.report.version>
@@ -29,8 +31,10 @@
 	
     <modules>
         <module>apache-poi</module>
+        <module>aspectj</module>
         <module>chronometer</module>
-		<module>csv</module>
+		<module>csv-reader</module>
+        <module>h2-database</module>
         <module>jasper-report</module>
 		<module>jfreechart</module>
         <module>parable</module>

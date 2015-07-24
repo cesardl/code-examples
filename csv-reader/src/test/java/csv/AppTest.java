@@ -15,7 +15,7 @@ import org.junit.Test;
 public class AppTest {
 
     @Test
-    public void read() {
+    public void readWithOutLibrary() {
         try {
             URL url = getClass().getClassLoader().getResource("pt-data1.csv");
             
@@ -26,7 +26,27 @@ public class AppTest {
                 f = new File(url.getPath());
             }
 
-            new PeriodicTable().readValues(f);
+            new PeriodicTable().readWithOutLibrary(f);
+
+            assertTrue(true);
+        } catch (IOException ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void readWithLibrary() {
+        try {
+            URL url = getClass().getClassLoader().getResource("pt-data1.csv");
+
+            File f;
+            try {
+                f = new File(url.toURI());
+            } catch (URISyntaxException e) {
+                f = new File(url.getPath());
+            }
+
+            new PeriodicTable().readWithLibrary(f);
 
             assertTrue(true);
         } catch (IOException ex) {

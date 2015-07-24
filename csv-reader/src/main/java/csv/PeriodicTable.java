@@ -3,8 +3,14 @@ package csv;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,31 +51,30 @@ public class PeriodicTable {
 
     static final int size = 20;
 
-    private String line;
-    private String[] parts;
-
-    public void readValues(File file) throws IOException {
+    public void readWithOutLibrary(File file) throws IOException {
         log.info("Read file from {}", file);
 
         Scanner sc = new Scanner(new FileReader(file));
         ArrayList<Element> ar1 = new ArrayList<>();
+        String line;
+        String[] parts;
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             parts = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
             if (parts.length > size) {
-                log.warn("The line have {} elements, omiting this", parts.length);
+                log.warn("The line have {} elements, omitting this", parts.length);
             }
 
             String chemicalName = parts[2].trim();
-            String simbol = parts[1].trim();
+            String symbol = parts[1].trim();
             String atomNum = parts[0].trim();
             String atomWeight = parts[3].trim();
             String boilPoint = parts[15].trim();
             String meltPoint = parts[16].trim();
             String density = parts[17].trim();
 
-            Element.Builder builder = new Element.Builder(chemicalName, simbol, atomNum)
+            Element.Builder builder = new Element.Builder(chemicalName, symbol, atomNum)
                     .atomWeight(atomWeight)
                     .boilPoint(boilPoint)
                     .meltPoint(meltPoint)
@@ -83,6 +88,17 @@ public class PeriodicTable {
         }
 
         log.info("Total {}", ar1.size());
+    }
+
+    public void readWithLibrary(File file) throws IOException {
+        log.info("Read file from {}", file);
+
+        CSVParser parser = CSVParser.parse(file, Charset.forName("UTF-8"), CSVFormat.newFormat(','));
+        for (CSVRecord csvRecord : parser) {
+            if (csvRecord.size() > size) {
+                log.warn("The line have {} elements, omitting this", csvRecord.size());
+            }
+        }
     }
 
 }
