@@ -87,7 +87,7 @@ public class JDBCExample {
 
                 stmt.executeUpdate(sql);
 
-                log.info("Executing {}", sql);
+                log.debug("Executing {}", sql);
             }
 
             sql = "SELECT * FROM MYLOVELYSTUDENTS";
@@ -143,12 +143,12 @@ public class JDBCExample {
     }
 
     /**
-     * @return
+     * @return a course
      */
     private static Course randCourse() {
         Course courses[] = Course.values();
         Course course = courses[randInt(0, courses.length - 1)];
-        // log.warn("Course loaded: {}", course);
+        log.debug("Course loaded: {}", course);
         return course;
     }
 
