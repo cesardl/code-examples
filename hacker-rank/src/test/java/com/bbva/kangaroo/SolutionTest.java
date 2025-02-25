@@ -12,6 +12,7 @@ public class SolutionTest {
 
         assertEquals("YES", result);
 
+        // -----------------------
         result = Solution.kangaroo(0, 2, 5, 3);
 
         assertEquals("NO", result);
@@ -20,6 +21,12 @@ public class SolutionTest {
     @Test
     public void solveTest1() {
         String result = Solution.kangaroo(43, 2, 70, 2);
+        assertEquals("NO", result);
+    }
+
+    @Test
+    public void solveTest2() {
+        String result = Solution.kangaroo(21, 6, 47, 3);
         assertEquals("NO", result);
     }
 }
