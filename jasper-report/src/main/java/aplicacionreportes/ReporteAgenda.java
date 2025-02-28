@@ -1,11 +1,5 @@
 package aplicacionreportes;
 
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -15,8 +9,14 @@ import net.sf.jasperreports.view.JasperViewer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author Cesardl
  */
 public class ReporteAgenda {
@@ -34,7 +34,7 @@ public class ReporteAgenda {
     /**
      * Password de usuario.
      */
-    private static final String password = "root";
+    private static final String password = "rootroot";
     /**
      * Conexion a la base de datos.
      */
@@ -70,7 +70,7 @@ public class ReporteAgenda {
 
             //este es el parámetro, se pueden agregar más parámetros
             //basta con poner mas parametro.put
-            Map parametro = new HashMap();
+            Map<String, Object> parametro = new HashMap<>();
             parametro.put("PARAMETRO_ID", contactId);
             log.info("PARAMETRO_ID: {}", parametro.get("PARAMETRO_ID"));
 

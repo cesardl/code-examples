@@ -1,13 +1,11 @@
 package com.bbva.mergearray;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 
 public class SolutionTest {
 
-    @Ignore
     @Test
     public void test() {
         int[] merge = Solution.merge(new int[]{1, 2, 3}, new int[]{4, 5, 6});

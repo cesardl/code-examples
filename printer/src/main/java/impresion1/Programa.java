@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class Programa extends JFrame {
 
     static final Logger log = LoggerFactory.getLogger(Programa.class);
-    
+
     String cadena;
     JTextField campo;
     JButton imprimir;
@@ -96,7 +96,7 @@ public class Programa extends JFrame {
 
     }//FIN DEL CONSTRUCTOR
 
-    public static void main(String jm[]) {
+    public static void main(String[] jm) {
         Programa p = new Programa();
         p.show();
 
