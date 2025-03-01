@@ -1,6 +1,6 @@
 package com.bbva.kangaroo;
 
-import java.util.Scanner;
+import java.io.*;
 
 /**
  * Created on 15/06/2017.
@@ -10,34 +10,39 @@ import java.util.Scanner;
 public class Solution {
 
     static String kangaroo(int x1, int v1, int x2, int v2) {
-        boolean stop = true;
-
-        int step1 = x1 + v1;
-        int step2 = x2 + v2;
-        int p0 = step2 - step1;
-
-        while (stop) {
-            step1 = step1 + v1;
-            step2 = step2 + v2;
-
-            int p1 = step2 - step1;
-
-            if (p1 >= p0) {
-                return "NO";
-            } else {
-                stop = false;
-            }
+        int x = (v2 - v1);
+        if (x == 0) {
+            return "NO";
         }
-        return "YES";
+        float n = (x1 - x2) / x;
+        int r = (x1 - x2) % x;
+        System.out.println(n + " - " + r);
+        if (r == 0 && n > 0) {
+            return "YES";
+        }
+        return "NO";
     }
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int x1 = in.nextInt();
-        int v1 = in.nextInt();
-        int x2 = in.nextInt();
-        int v2 = in.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int x1 = Integer.parseInt(firstMultipleInput[0]);
+
+        int v1 = Integer.parseInt(firstMultipleInput[1]);
+
+        int x2 = Integer.parseInt(firstMultipleInput[2]);
+
+        int v2 = Integer.parseInt(firstMultipleInput[3]);
+
         String result = kangaroo(x1, v1, x2, v2);
-        System.out.println(result);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
     }
 }
