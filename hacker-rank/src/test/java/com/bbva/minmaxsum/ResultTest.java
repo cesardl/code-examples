@@ -1,4 +1,4 @@
-package com.bbva.minimaxsum;
+package com.bbva.minmaxsum;
 
 import org.junit.Test;
 
