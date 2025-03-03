@@ -3,17 +3,15 @@ package com.bbva.biggerisgreater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Solution {
 
     static final Logger LOG = LoggerFactory.getLogger(Solution.class);
+    private static final Scanner scanner = new Scanner(System.in);
 
     // Complete the biggerIsGreater function below.
     static String biggerIsGreater(String w) {
@@ -29,8 +27,6 @@ public class Solution {
 
         return "no answer";
     }
-
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         System.getenv().forEach((k, v) -> LOG.info("{} -> {}", k, v));

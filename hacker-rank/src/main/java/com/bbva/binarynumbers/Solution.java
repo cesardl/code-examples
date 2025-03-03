@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Solution {
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     static int binaryAndConsecutive(int n) {
         List<Integer> binary = new ArrayList<>();
 
@@ -30,8 +32,6 @@ public class Solution {
         counts.add(count);
         return counts.stream().max(Comparator.comparing(Integer::valueOf)).get();
     }
-
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 //        int n = scanner.nextInt();

@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class Solution {
 
-    static int[] merge(int a[], int b[]) {
+    static int[] merge(int[] a, int[] b) {
         int firstIterator = 0;
         int secondIterator = 0;
 

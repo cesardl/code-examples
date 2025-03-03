@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Solution {
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     // Complete the sockMerchant function below.
     static int sockMerchant(int n, int[] ar) {
         if (n != ar.length) {
@@ -37,8 +39,6 @@ public class Solution {
 
         return pairs;
     }
-
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));

@@ -12,7 +12,8 @@ public class SolutionTest {
     @Test
     public void sorterTest() {
         GenericClass<StringBuilder> gc = new GenericClass<>(new StringBuilder("hola Mundo..."));
-        System.out.println(gc.getToString());;
+        System.out.println(gc.getToString());
+        ;
 
 //        String[] actuals = {
 //                "-100",

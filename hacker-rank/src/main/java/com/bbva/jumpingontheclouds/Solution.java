@@ -1,12 +1,9 @@
 package com.bbva.jumpingontheclouds;
 
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
 
 /**
  * Created on 30/09/2018.
@@ -14,6 +11,8 @@ import java.util.regex.*;
  * @author Cesardl
  */
 public class Solution {
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     // Complete the jumpingOnClouds function below.
     static int jumpingOnClouds(int[] c) {
@@ -65,8 +64,6 @@ public class Solution {
     private static Set<Integer> makeWay(boolean isNew, Set<Integer> way, int v) {
         return null;
     }
-
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));

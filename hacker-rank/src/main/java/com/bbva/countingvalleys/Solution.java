@@ -12,6 +12,8 @@ import java.util.Scanner;
  */
 public class Solution {
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     /**
      * It must return an integer that denotes the number of valleys Gary traversed.
      *
@@ -53,12 +55,6 @@ public class Solution {
         }
     }
 
-    enum State {
-        UP, SEA_LEVEL, DOWN
-    }
-
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
@@ -75,5 +71,9 @@ public class Solution {
         bufferedWriter.close();
 
         scanner.close();
+    }
+
+    enum State {
+        UP, SEA_LEVEL, DOWN
     }
 }

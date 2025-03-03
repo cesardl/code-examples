@@ -2,7 +2,7 @@ package com.bbva.reducedstring;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created for examples on 01/03/2025.
