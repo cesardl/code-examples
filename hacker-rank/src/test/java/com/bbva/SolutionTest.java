@@ -13,7 +13,6 @@ public class SolutionTest {
     public void sorterTest() {
         GenericClass<StringBuilder> gc = new GenericClass<>(new StringBuilder("hola Mundo..."));
         System.out.println(gc.getToString());
-        ;
 
 //        String[] actuals = {
 //                "-100",
@@ -44,7 +43,7 @@ public class SolutionTest {
     }
 
     public static class GenericClass<T extends Object> {
-        private T object;
+        private final T object;
 
         public GenericClass(T object) {
             this.object = object;
