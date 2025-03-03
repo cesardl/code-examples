@@ -1,5 +1,8 @@
 package com.bbva.biggerisgreater;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -9,6 +12,8 @@ import java.util.concurrent.*;
 import java.util.regex.*;
 
 public class Solution {
+
+    static final Logger LOG = LoggerFactory.getLogger(Solution.class);
 
     // Complete the biggerIsGreater function below.
     static String biggerIsGreater(String w) {
@@ -28,8 +33,9 @@ public class Solution {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+        System.getenv().forEach((k, v) -> LOG.info("{} -> {}", k, v));
 
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
         int T = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
