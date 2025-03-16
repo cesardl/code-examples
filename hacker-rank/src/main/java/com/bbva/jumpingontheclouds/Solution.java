@@ -9,6 +9,7 @@ import java.util.*;
  * Created on 30/09/2018.
  *
  * @author Cesardl
+ * @see <a href="https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem">Jumping on the Clouds</a>
  */
 public class Solution {
 

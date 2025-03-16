@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * @see <a href="https://www.hackerrank.com/challenges/bigger-is-greater/problem">Bigger is Greater</a>
+ */
 public class Solution {
 
     static final Logger LOG = LoggerFactory.getLogger(Solution.class);
