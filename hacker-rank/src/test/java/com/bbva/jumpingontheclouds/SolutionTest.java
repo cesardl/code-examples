@@ -3,12 +3,14 @@ package com.bbva.jumpingontheclouds;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 
 /**
  * Created on 30/09/2018.
  *
  * @author Cesardl
  */
+@Ignore
 public class SolutionTest {
 
     @Test

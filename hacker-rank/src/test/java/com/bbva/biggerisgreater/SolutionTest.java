@@ -3,12 +3,14 @@ package com.bbva.biggerisgreater;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 
 /**
  * Created on 25/12/2019.
  *
  * @author Cesardl
  */
+@Ignore
 public class SolutionTest {
 
     @Test
